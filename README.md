@@ -33,7 +33,8 @@
   * TodoListService
   >TodoList의 실질적인 기능(행동) 로직
 
-
+  * TodoListRepository
+  >할 일 및 카테고리들을 List형태로 저장, 검색, 관리
 
 
 
@@ -58,3 +59,7 @@
 - TodoCategoryDTO 페이지 작성
 
 - Github Readme 공부하기 및 프로젝트 파일 첫 업로드
+
+#### 2025.01.10.
+
+-이후 수정 사안은 commit 설명글에 참조
