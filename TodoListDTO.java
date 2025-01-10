@@ -1,4 +1,4 @@
-package TodoList;
+package todoList;
 
 public class TodoListDTO {
   
@@ -17,43 +17,43 @@ public class TodoListDTO {
     this.todoCreateDate=todoCreateDate;
   }
   
-  public Long gettodoId(){
-    return gettodoId;
+  public Long getTodoId(){
+    return todoId;
   }
   
-  public void settodoId(Long todoId){
-    this.gettodoId=gettodoId;
+  public void setTodoId(Long todoId){
+    this.todoId=todoId;
   }
   
-  public String todoContent(){
+  public String getTodoContent(){
     return todoContent;
   }
   
-  public void settodoContent(String todoContent){
-    this.todoCategory=todoCategory;
+  public void setTodoContent(String todoContent){
+    this.todoContent=todoContent;
   }
   
-  public String todoCategory(){
+  public String getTodoCategory(){
     return todoCategory;
   }
   
-  public void settodoCategory(String todoCategory){
+  public void setTodoCategory(String todoCategory){
     this.todoCategory=todoCategory;
   }
   
-  public String todoDeadline(){
+  public String getTodoDeadline(){
     return todoDeadline;
   }
   
-  public void settodoDeadline(String todoDeadline){
+  public void setTodoDeadline(String todoDeadline){
     this.todoDeadline=todoDeadline;
   }
   
-  public String todoCreateDate(){
+  public String getTodoCreateDate(){
     return todoCreateDate;
   }
   
-  public void settodoCreateDate(String todoCreateDate){
+  public void setTodoCreateDate(String todoCreateDate){
     this.todoCreateDate=todoCreateDate;
   }
   
