@@ -136,8 +136,6 @@ public class TodoListMain {
 				System.out.println("숫자를 입력하세요.");
       }catch (IOException e) {
         System.out.println("입력 오류 발생");
-      }finally{
-        continue;
       }
       
     }
