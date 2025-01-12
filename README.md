@@ -26,7 +26,7 @@
 ### Class
 
   * TodoListMain
-  > 할 일 목록의 구동 중심 (교차로) main
+  > TodoListService의 API를 토대로 시각적 정보 제공
 
   * TodoListDTO
   >할 일 목록란의 인터페이스 지정관리
@@ -35,7 +35,7 @@
   >카테고리의 인터페이스 지정관리
 
   * TodoListService
-  >TodoList의 실질적인 기능(행동) 로직
+  > TodoListRepository의 기능을 담은 API
 
   * TodoListRepository
   >할 일 및 카테고리들을 List형태로 저장, 검색, 관리
@@ -67,15 +67,23 @@
 #### 2025.01.10.
 
 - TodoListReapository 일부 구현
-- - 할 일 및 카테고리 요소 추가 기능 구현
-- - 특정 카테고리의 이름 수정 기능 구현
+  > 할 일 및 카테고리 요소 추가 기능 구현
+  > 특정 카테고리의 이름 수정 기능 구현
 
 #### 2025.01.11.
 
 - Github 업로드 파일 내 package 파일 추가로 인한 java파일들 경로 이동
 
 - TodoListRepository 초기단계의 구현완료
-- - 할 일 및 카테고리에 대한 수정, 삭제, 검색 기능 구현완료
+  > 할 일 및 카테고리에 대한 수정, 삭제, 검색 기능 구현완료
 
 - TodoListMain의 finally구문 제거
-- - 예외 및 경고처리 방지
+  > 예외 및 경고처리 방지
+
+#### 2025.01.12.
+
+- TodoListService 일부 구현
+  > 할 일 및 카테고리에 대한 검색, 추가 기능 구현완료
+  > 특정 데이터값 반환 함수
+    > TodoListDTO값 리턴
+    > TodoCategoryDTO값 리턴

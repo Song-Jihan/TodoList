@@ -22,21 +22,23 @@ public class TodoListMain {
           case 1: // 1.할 일 보기
             boolean run1=true;
             while(run1){
-              System.out.println("1.모든 할 일 보기 | 2.카테고리별 보기 | 3.완료한 할 일 보기 | 4.뒤로가기");
+              System.out.println("1.모든 할 일 보기 | 2.카테고리별 보기 | 3.완료한 할 일 보기 | 4.내용 키워드로 검색 | 5.뒤로가기");
               PrintSetNum();
               selectNum=Integer.parseInt(br.readLine());
   
               switch(selectNum){
                 case 1: // 1.모든 할 일 보기
-                  todoListService.findTodoList();
+                  todoListService.findIncompletedTodoList();
                   break;
                 case 2: // 2.카테고리별 보기
-                  todoListService.findTodoListbyCategory();
+                  todoListService.findTodoListByCategory();
                   break;
                 case 3: // 3.완료한 할 일 보기
                   todoListService.findCompletedTodoList();
                   break;
-                case 4:// 4.뒤로가기
+                case 4:
+                  todoListService.findTodoListByKeyword();
+                case 5:// 5.뒤로가기
                   run1=false;
                   break;
                 default:
@@ -54,10 +56,10 @@ public class TodoListMain {
   
               switch(selectNum){
                 case 1: // 1.새 할 일 추가
-                  todoListService.Newtodo();
+                  todoListService.saveTodo();
                   break;
                 case 2: // 2.카테고리 추가
-                  todoListService.Newcatagory();
+                  todoListService.saveCategory();
                   break;
                 case 3: // 3.뒤로가기
                   run2=false;
@@ -141,8 +143,8 @@ public class TodoListMain {
     }
   }
   
-  static void PrintSetNum(){System.out.print("번호 입력: ");}
+  static public void PrintSetNum(){System.out.print("번호 입력: ");}
   
-  static void PrintWrongNum(){System.out.println("잘못된 숫자 입력입니다.");}
+  static public void PrintWrongNum(){System.out.println("잘못된 숫자 입력입니다.");}
   
 }
