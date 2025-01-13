@@ -14,6 +14,7 @@ public class TodoListRepository{
 	static String defaultCategory="내 할 일 목록";
 
 	public ArrayList<TodoCategoryDTO> findAllCategory(){
+		if(categoryList.isEmpty()) return null;
 		return categoryList;
 	}
 	
@@ -136,22 +137,13 @@ public class TodoListRepository{
 		return result;
 	}
 
-	public boolean updateCategory(Long categoryId, String categoryName){
+	public boolean updateCategory(Long todoId, String categoryName){
 		boolean result=false;
-		String beforeCategoryName="";
-		for(TodoCategoryDTO category:categoryList){
-			if(category.getCategoryId().equals(categoryId)){
-				beforeCategoryName=category.getCategoryName();
+		for(TodoListDTO todo:todoList){
+			if(todo.getTodoId().equals(todoId)){
+				todo.setTodoCategory(categoryName);
 				result=true;
 				break;
-			}
-		}
-		if(!result){
-			return result;
-		}
-		for(TodoListDTO todo:todoList){
-			if(todo.getTodoCategory().equals(beforeCategoryName)){
-				todo.setTodoCategory(categoryName);
 			}
 		}
 		return result;

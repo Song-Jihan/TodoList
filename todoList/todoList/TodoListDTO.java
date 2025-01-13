@@ -12,6 +12,7 @@ public class TodoListDTO {
   
   public TodoListDTO(Long todoId,String todoContent, String todoCategory, String todoDeadline, String todoCreateDate){
     this.todoId=todoId;
+    this.todoContent=todoContent;
     this.todoCategory=todoCategory;
     this.todoDeadline=todoDeadline;
     this.todoCreateDate=todoCreateDate;

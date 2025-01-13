@@ -11,6 +11,7 @@ public class TodoListMain {
     int selectNum=0;
     
     TodoListService todoListService=new TodoListService();
+    todoListService.defaultCategorySave();
     
     while(run){
       try{
@@ -82,10 +83,10 @@ public class TodoListMain {
                   todoListService.updateTodoContents();
                   break;
                 case 2: // 2.할 일 완료
-                  todoListService.updateTodoComplete();
+                  todoListService.updateTodoCompleted();
                   break;
                 case 3: // 3.할 일 카테고리 이동
-                  todoListService.updateTodoCategory();
+                  todoListService.updateCategory();
                   break;
                 case 4: // 4.할 일 마감일 수정
                   todoListService.updateDeadline();
@@ -110,10 +111,10 @@ public class TodoListMain {
   
               switch(selectNum){
                 case 1:
-                  todoListService.deleteTodoList();
+                  todoListService.deleteTodo();
                   break;
                 case 2:
-                  todoListService.deleteAllOfCompletedList();
+                  todoListService.deleteAllCompleted();
                   break;
                 case 3:
                   todoListService.deleteCategory();

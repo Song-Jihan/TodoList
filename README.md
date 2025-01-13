@@ -85,5 +85,5 @@
 - TodoListService 일부 구현
   > 할 일 및 카테고리에 대한 검색, 추가 기능 구현완료
   > 특정 데이터값 반환 함수
-    > > TodoListDTO값 리턴
-    > > TodoCategoryDTO값 리턴
+    > TodoListDTO값 리턴
+    > TodoCategoryDTO값 리턴
