@@ -85,5 +85,24 @@
 - TodoListService 일부 구현
   > 할 일 및 카테고리에 대한 검색, 추가 기능 구현완료
   > 특정 데이터값 반환 함수
-    > TodoListDTO값 리턴
-    > TodoCategoryDTO값 리턴
+    > TodoListDTO값 리턴, TodoCategoryDTO값 리턴
+
+#### 2025.01.13.
+
+- TodoListService 초기단계 완전 구현 완료
+  > 할 일 및 카테고리에 대한 삭제, 수정 기능 구현완료
+  > Main페이지에 기본 카테고리 세팅 메서드 첨부
+
+- TodoListService의 todoListId, categoryListId static에서 지역변수로 변환
+  > static으로 인한 Id정수가 순차적으로 증가하지 않는 버그 발생
+
+- TodoListService의 todoId, categoryId 의 이름을 todoListId, categoryListId 로 변경
+  > 각 메서드내 지역변수와 메서드 밖에서 할 일 및 카테고리의 id 개수를 세주는 변수의 이름 동일한 문제가 있었음
+
+- 할 일 수정 기능에서 다른 카테고리로 수정하는 기능 버그 수정
+  > 기존의 카테고리 이름 수정 기능과 동일한 로직으로 작성한 문제 발견
+
+- TodoListService의 returnTodoId, returnCategoryId 에서 목록들이 비어있다면 0이 나오도록 변경
+  > 해당 리턴을 건네주는 메서드들을 이용하는 각종 메서드에서 잘못된 입력을 받을 시, 조기에 로직을 종료시켜줌
+
+- TodoListDTO의 인스턴스 메서드에 todoContent를 빼먹고 객체를 생성시키는 오류 발견
