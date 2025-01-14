@@ -3,19 +3,21 @@ package todoList;
 public class TodoListDTO {
   
   private Long todoId;
+  private String todoTitle;
   private String todoContent;
   private String todoCategory;
   private String todoDeadline;
-  private String todoCreateDate;
+  private String beforeCategory;
   
   public TodoListDTO(){}
   
-  public TodoListDTO(Long todoId,String todoContent, String todoCategory, String todoDeadline, String todoCreateDate){
+  public TodoListDTO(Long todoId,String todoTitle, String todoContent, String todoCategory, String todoDeadline){
     this.todoId=todoId;
+    this.todoTitle=todoTitle;
     this.todoContent=todoContent;
     this.todoCategory=todoCategory;
     this.todoDeadline=todoDeadline;
-    this.todoCreateDate=todoCreateDate;
+    beforeCategory=todoCategory;
   }
   
   public Long getTodoId(){
@@ -26,6 +28,14 @@ public class TodoListDTO {
     this.todoId=todoId;
   }
   
+  public String getTodoTitle(){
+    return todoTitle;
+  }
+  
+  public void setTodoTitle(String todoTitle){
+    this.todoTitle=todoTitle;
+  }
+
   public String getTodoContent(){
     return todoContent;
   }
@@ -49,19 +59,18 @@ public class TodoListDTO {
   public void setTodoDeadline(String todoDeadline){
     this.todoDeadline=todoDeadline;
   }
-  
-  public String getTodoCreateDate(){
-    return todoCreateDate;
+
+  public String getBeforeCategory(){
+    return beforeCategory;
   }
   
-  public void setTodoCreateDate(String todoCreateDate){
-    this.todoCreateDate=todoCreateDate;
+  public void setBeforeCategory(String beforeCategory){
+    this.beforeCategory=beforeCategory;
   }
   
   @Override
   public String toString(){
-    return "ToDoListDTO {todoList="+todoId+", todoContent="+todoContent+", todoCategory="+todoCategory
-            +", todoDeadline="+todoDeadline+", todoCreateDate="+todoCreateDate+"}";
+    return "ToDoListDTO {todoList="+todoId+", todoTitle="+todoTitle+", todoContent="+todoContent+", todoCategory="+todoCategory+", todoDeadline="+todoDeadline+", beforeCategory="+beforeCategory+"}";
   }
   
 }

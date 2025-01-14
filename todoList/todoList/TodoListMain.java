@@ -74,7 +74,7 @@ public class TodoListMain {
           case 3: // 3.수정하기
             boolean run3=true;
             while(run3){
-              System.out.println("1.할 일 내용 수정 | 2.할 일 완료 | 3.할 일 카테고리 이동 | 4.할 일 마감일 수정 | 5.카테고리 이름 수정 | 6.뒤로가기");
+              System.out.println("1.할 일 내용 수정 | 2.할 일 완료 | 3.할 일 완료취소 | 4.할 일 카테고리 이동 | 5.할 일 마감일 수정 | 6.카테고리 이름 수정 | 7.카테고리 설명 수정 | 8. 뒤로가기");
               PrintSetNum();
               selectNum=Integer.parseInt(br.readLine());
   
@@ -85,16 +85,22 @@ public class TodoListMain {
                 case 2: // 2.할 일 완료
                   todoListService.updateTodoCompleted();
                   break;
-                case 3: // 3.할 일 카테고리 이동
+                case 3: // 3.할 일 완료취소
+                  todoListService.updateCompletedToIncompleted();
+                  break;
+                case 4: // 4.할 일 카테고리 이동
                   todoListService.updateCategory();
                   break;
-                case 4: // 4.할 일 마감일 수정
+                case 5: // 5.할 일 마감일 수정
                   todoListService.updateDeadline();
                   break;
-                case 5: // 5.카테고리 이름 수정
+                case 6: // 6.카테고리 이름 수정
                   todoListService.updateCategoryName();
                   break;
-                case 6: // 6.뒤로가기
+                case 7: //7.카테고리 설명 수정
+                  todoListService.updateCategoryDiscription();
+                  break;
+                case 8: // .뒤로가기
                   run3=false;
                   break;
                 default:

@@ -10,8 +10,8 @@ public class TodoListRepository{
 	static ArrayList<TodoListDTO> todoList = new ArrayList<>();
 	static ArrayList<TodoCategoryDTO> categoryList = new ArrayList<>();
 	
-	static String completeCategory="완료한 할 일 목록";
-	static String defaultCategory="내 할 일 목록";
+	final static String completeCategory="완료한 할 일 목록";
+	final static String defaultCategory="내 할 일 목록";
 
 	public ArrayList<TodoCategoryDTO> findAllCategory(){
 		if(categoryList.isEmpty()) return null;
@@ -57,7 +57,7 @@ public class TodoListRepository{
 				@Override
 				public int compare(TodoListDTO o1, TodoListDTO o2){
 					return (o1.getTodoDeadline().compareTo(o2.getTodoDeadline()));
-				} 
+				}
 			});
 		}
 		return incompletedTodoList;
@@ -99,8 +99,9 @@ public class TodoListRepository{
 	public ArrayList<TodoListDTO> findTodoListByKeyword(String keyword){
 		ArrayList<TodoListDTO> todoListByKeyword=new ArrayList<>();
 		for(TodoListDTO todo:todoList){
+			String title=todo.getTodoTitle();
 			String content=todo.getTodoContent();
-			if(content.contains(keyword)){
+			if(title.contains(keyword) || content.contains(keyword)){
 				todoListByKeyword.add(todo);
 				Collections.sort(todoListByKeyword,new Comparator<TodoListDTO>() {
 					@Override
@@ -111,6 +112,18 @@ public class TodoListRepository{
 			}
 		}
 		return todoListByKeyword;
+	}
+
+	public boolean updateTodoTitle(Long todoId, String title){
+		boolean result=false;
+		for(TodoListDTO todo:todoList){
+			if(todo.getTodoId().equals(todoId)){
+				todo.setTodoTitle(title);
+				result=true;
+				break;
+			}
+		}
+		return result;
 	}
 
 	public boolean updateTodoContents(Long todoId, String content){
@@ -130,6 +143,18 @@ public class TodoListRepository{
 		for(TodoListDTO todo:todoList){
 			if(todo.getTodoId().equals(todoId)){
 				todo.setTodoCategory(completeCategory);
+				result=true;
+				break;
+			}
+		}
+		return result;
+	}
+
+	public boolean updateCompletedToIncompleted(Long todoId){
+		boolean result=false;
+		for(TodoListDTO todo:todoList){
+			if(todo.getTodoId().equals(todoId)){
+				todo.setTodoCategory(todo.getBeforeCategory());
 				result=true;
 				break;
 			}
@@ -179,6 +204,17 @@ public class TodoListRepository{
 				continue;
 			}
 			todo.setTodoCategory(categoryName);
+		}
+		return result;
+	}
+
+	public boolean updateCategoryDiscription(Long categoryId, String categoryDiscription){
+		boolean result=false;
+		for(TodoCategoryDTO category:categoryList){
+			if(category.getCategoryId().equals(categoryId)){
+				category.setCategoryDiscription(categoryDiscription);
+				result=true;
+			}
 		}
 		return result;
 	}

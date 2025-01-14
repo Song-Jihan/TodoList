@@ -4,22 +4,28 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
 
 public class TodoListService {
   static BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
   static TodoListRepository todoListRepository=new TodoListRepository();
 
-  Long todoListId=0L;
-  Long categoryListId=0L;
+  private Long todoListId=0L;
+  private Long categoryListId=0L;
 
   public Long returnTodoId(String whatTodo) throws IOException{
     if(!findIncompletedTodoList()){
       return 0L;
     }
     System.out.print(whatTodo+" 할 일 번호 입력: ");
-    return todoListId=Long.parseLong(br.readLine());
+    return Long.parseLong(br.readLine());
+  }
+
+  public Long returnCompletedTodoId(String whatTodo) throws IOException{
+    if(!findCompletedTodoList()){
+      return 0L;
+    }
+    System.out.print(whatTodo+" 할 일 번호 입력: ");
+    return Long.parseLong(br.readLine());
   }
 
   public Long returnCategoryId(String whatTodo) throws IOException{
@@ -27,7 +33,7 @@ public class TodoListService {
       return 0L;
     }
     System.out.print(whatTodo+" 카테고리 번호 입력: ");
-    return categoryListId=Long.parseLong(br.readLine());
+    return Long.parseLong(br.readLine());
   }
 
   public boolean findAllCategory(){
@@ -117,29 +123,32 @@ public class TodoListService {
   }
 
   public void saveTodo() throws IOException{
-    System.out.print("새로 할 일 내용 입력: ");
-    String todoContent=br.readLine();
-    if(todoContent==null){
-      TodoListMain.PrintWrongNum();
-    }
-    Long categoryId=returnCategoryId("찾음");
-    String categoryName=todoListRepository.findCategoryNameByCategoryId(categoryId);
-    if(categoryName==null){
+    System.out.print("새로 할 일 제목 입력: ");
+    String todoTitle=br.readLine();
+    if(todoTitle==null){
       TodoListMain.PrintWrongNum();
     }
     else{
-      System.out.print("마감일 입력(YYYY.MM.DD.): ");
-      String todoDeadline=br.readLine();
-      SimpleDateFormat sdf = new SimpleDateFormat("YYYY.MM.DD.");
-      String todoCreateDate = sdf.format(Calendar.getInstance().getTime());
-      TodoListDTO newTodo=new TodoListDTO(++todoListId, todoContent, categoryName, todoDeadline, todoCreateDate);
-      if(todoListRepository.saveTodo(newTodo)){
-        System.out.println("할 일 등록 완료");
+      System.out.print("새로 할 일 내용 입력: ");
+      String todoContent=br.readLine();
+      Long categoryId=returnCategoryId("찾음");
+      String categoryName=todoListRepository.findCategoryNameByCategoryId(categoryId);
+      if(categoryName==null){
+        TodoListMain.PrintWrongNum();
       }
       else{
-        System.out.println("할 일 등록 실패");
-      }
-    }  
+        System.out.print("마감일 입력(YYYY.MM.DD.): ");
+        String todoDeadline=br.readLine();
+        TodoListDTO newTodo=new TodoListDTO(++todoListId, todoTitle, todoContent, categoryName, todoDeadline);
+        if(todoListRepository.saveTodo(newTodo)){
+          System.out.println("할 일 등록 완료");
+        }
+        else{
+          System.out.println("할 일 등록 실패");
+          --todoListId;
+        }
+      }  
+    }
   }
 
   public void saveCategory() throws IOException{
@@ -157,9 +166,26 @@ public class TodoListService {
       }
       else{
         System.out.println("카테고리 저장 실패");
+        --categoryListId;
       }
       findAllCategory();
     }
+  }
+
+  public void updateTodoTitle() throws IOException{
+    Long todoId=returnTodoId("제목을 수정할");
+    if(todoId.equals(0L)){
+      return;
+    }
+    System.out.print("수정할 제목 입력: ");
+    String title=br.readLine();
+    if(todoListRepository.updateTodoTitle(todoId,title)){
+      printUpdateSuccess();
+    }
+    else{
+      printUpdateFail();
+    }
+    findIncompletedTodoList();
   }
 
   public void updateTodoContents() throws IOException{
@@ -184,6 +210,20 @@ public class TodoListService {
       return;
     }
     if(todoListRepository.updateTodoCompleted(todoId)){
+      printUpdateSuccess();
+    }
+    else{
+      printUpdateFail();
+    }
+    findIncompletedTodoList();
+  }
+
+  public void updateCompletedToIncompleted() throws IOException{
+    Long todoId=returnCompletedTodoId("다시 미완료시킬");
+    if(todoId.equals(0L)){
+      return;
+    }
+    if(todoListRepository.updateCompletedToIncompleted(todoId)){
       printUpdateSuccess();
     }
     else{
@@ -251,6 +291,22 @@ public class TodoListService {
       }
       findAllCategory();
     }
+  }
+
+  public void updateCategoryDiscription() throws IOException{
+    Long categoryId=returnCategoryId("수정할");
+    if(categoryId.equals(0L)){
+      return;
+    }
+    System.out.print("새 카테고리 설명 입력: ");
+    String categoryDiscription=br.readLine();
+    if(todoListRepository.updateCategoryDiscription(categoryId,categoryDiscription)){
+      printUpdateSuccess();
+    }
+    else{
+      printUpdateFail();
+    }
+    findAllCategory();
   }
 
   public void deleteTodo() throws IOException{
